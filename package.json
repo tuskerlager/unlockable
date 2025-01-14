@@ -1,6 +1,6 @@
 {
   "name": "unlockable",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Unlock blog posts, articles, newspapers and more.",
   "main": "index.js",
   "scripts": {

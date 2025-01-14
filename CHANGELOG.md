@@ -9,9 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- new feature 
 - new feature
-
+- new feature
 
 ### Changed
 
@@ -28,4 +27,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - This CHANGELOG file to hopefully serve as an evolving example of a
   standardized open source project CHANGELOG.
 - Counter-examples: "What makes unicorns cry?".
-
+- Dirty commits everywhere, but no one cares. It works
