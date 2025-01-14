@@ -1,4 +1,5 @@
-/** Nation Africa */
+/** Nation Africa (KE) */
+export const hostname = "nation.africa";
 
 export async function handle() {
     const url = window.location.href; // Get the current page URL

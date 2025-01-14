@@ -1,8 +1,5 @@
-/**
- * Business Daily Africa: www.businessdailyafrica.com
- */
-
-export const hostname = "www.businessdailyafrica.com";
+/** The East African www.theeastafrican.co.ke */
+export const hostname = "www.theeastafrican.co.ke";
 
 // Remove HTML classes from elements
 // NOT-EQUAL-TO Removing elements based on classes they have (which is the defined elsewhere)
@@ -22,7 +19,7 @@ function removeDivsById(divId) {
   });
 
   if (divs.length === 0) {
-    console.log(`📰 Paywaller: No divs found with id: ${divId}`);
+    console.log(`Unlockable: No divs found with id: ${divId}`);
   }
 }
 

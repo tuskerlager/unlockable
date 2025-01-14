@@ -42,7 +42,9 @@
   "standard-media-ke": {
     "hostname": "www.standardmedia.co.ke",
     "actions": [],
-    "test-urls": []
+    "test-urls": [
+      "https://www.standardmedia.co.ke/business/enterprise/article/2001509605/study-reveals-top-careers-with-highest-risk-of-job-loss-in-5-years"
+    ]
   },
   "mwananchi-tz": {
     "hostname": "www.mwananchi.co.tz",

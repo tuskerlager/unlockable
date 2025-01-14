@@ -1,4 +1,5 @@
-/** The East African www.theeastafrican.co.ke */
+/** Business Daily Africa: www.businessdailyafrica.com */
+export const hostname = "www.businessdailyafrica.com";
 
 // Remove HTML classes from elements
 // NOT-EQUAL-TO Removing elements based on classes they have (which is the defined elsewhere)
@@ -18,12 +19,11 @@ function removeDivsById(divId) {
   });
 
   if (divs.length === 0) {
-    console.log(`Unlockable: No divs found with id: ${divId}`);
+    console.log(`📰 Paywaller: No divs found with id: ${divId}`);
   }
 }
 
 // Handle the unlocking of the page; handle is the default/main function for every site
-export const hostname = "www.theeastafrican.co.ke";
 export async function handle() {
   removeClassFromElements("nmgp");
   removeDivsById("paywall");
