@@ -1,0 +1,3 @@
+### Contributing
+
+Thank you for considering contributing to this project! We value simplicity and clarity, so when making contributions, please keep your code and documentation straightforward and easy to understand. Stick to the existing coding style, write meaningful commit messages, and ensure your changes are well-tested. If you're introducing new features, provide a clear explanation of their purpose and functionality. For any questions, feel free to open a discussion or issue—we're here to help!
