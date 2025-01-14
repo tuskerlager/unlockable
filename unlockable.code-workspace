@@ -1,0 +1,31 @@
+{
+	"folders": [
+	  {
+		"path": "."
+	  }
+	],
+	"settings": {
+	  "[javascript]": {
+		"editor.maxTokenizationLineLength": 2500,
+		"editor.formatOnSave": false
+	  },
+	  "[json]": {
+		"editor.quickSuggestions": {
+		  "strings": true
+		},
+		"editor.suggest.insertMode": "replace"
+	  },
+	  "editor.defaultFormatter": "esbenp.prettier-vscode",
+	  "[html]": {
+		"editor.defaultFormatter": "vscode.html-language-features",
+		"editor.formatOnSave": false
+	  },
+	  "[css]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	  },
+	  "[shellscript]": {
+		// "editor.defaultFormatter": "foxundermoon.shell-format"
+	  }
+	}
+  }
+  

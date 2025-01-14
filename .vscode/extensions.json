@@ -1,0 +1,13 @@
+{
+    "recommendations": [
+        "bierner.color-info",
+        "firefox-devtools.vscode-firefox-debug",
+        "github.copilot",
+        "visualstudioexptteam.vscodeintellicode",
+        "ms-vscode.vscode-typescript-next",
+        "esbenp.prettier-vscode",
+        "yoavbls.pretty-ts-errors",
+        "rangav.vscode-thunder-client",
+        "foxundermoon.shell-format"
+    ]
+}
