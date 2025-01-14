@@ -1,0 +1,10 @@
+{
+  "extensionName": {
+    "message": "Unlockable",
+    "description": "Name of the extension."
+  },
+  "extensionDescription": {
+    "message": "Unlockable is a browser extension that allows users to unlock content on websites like blogs, news sites, forums, articles, etc.",
+    "description": "Description of the extension."
+  }
+}

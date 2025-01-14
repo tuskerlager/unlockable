@@ -4,7 +4,12 @@
   "description": "Unlock blog posts, articles, newspapers and more.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run build:firefox && npm run build:chromium",
+    "build:firefox": "webpack --config webpack/webpack.firefox.js",
+    "build:chromium": "webpack --config webpack/webpack.chromium.js",
+    "dev:firefox": "webpack --config webpack/webpack.firefox.js --watch",
+    "dev:chromium": "webpack --config webpack/webpack.chromium.js --watch"
   },
   "author": "tuskerlager",
   "license": "MIT",
@@ -12,7 +17,9 @@
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
     "babel-loader": "^9.2.1",
+    "copy-webpack-plugin": "^12.0.2",
     "json-loader": "^0.5.7",
+    "mini-css-extract-plugin": "^2.9.2",
     "webpack": "^5.97.1",
     "webpack-cli": "^6.0.1"
   }
