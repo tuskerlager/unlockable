@@ -1,0 +1,92 @@
+{
+  "nation-africa": {
+    "hostname": "nation.africa",
+    "actions": [],
+    "js": "../content/site/nationAfrica.js",
+    "test-urls": [
+      "https://nation.africa/kenya/news/politics/after-gachagua-ouster-which-way-mt-kenya--4807706#story",
+      "https://nation.africa/kenya/news/education/in-turkana-county-grade-a-in-kcse-remains-elusive-9-years-later-4886776#story",
+      "https://nation.africa/kenya/business/reality-check-hits-ruto-s-a-million-a-year-jobs-plan-4887026#story",
+      "https://nation.africa/kenya/nation-prime/kdf-shabaab-school-lectures-kenya-1924138"
+    ]
+  },
+  "the-east-african": {
+    "hostname": "www.theeastafrican.co.ke",
+    "actions": [],
+    "js": "../content/site/theEastAfrican.js",
+    "test-urls": [
+      "https://www.theeastafrican.co.ke/tea/business-tech/kenya-treasury-terms-banks-data-on-state-accounts-insincere-4885570",
+      "https://www.theeastafrican.co.ke/tea/news/north-africa/in-sudan-war-everyone-is-enemy-at-some-point-4885644",
+      "https://www.theeastafrican.co.ke/tea/sustainability/innovation/kenya-tanzania-lose-76-4m-to-censorship-4885688"
+    ]
+  },
+  "business-daily-africa": {
+    "hostname": "www.businessdailyafrica.com",
+    "actions": [],
+    "js": "../content/site/businessDailyAfrica.js",
+    "test-urls": [
+      "https://www.businessdailyafrica.com/bd/corporate/companies/how-investment-income-handed-insurers-record-sh8-5bn-profit-4887028",
+      "https://www.businessdailyafrica.com/bd/economy/kra-slows-down-on-m-pesa-paybills-tax-register-plan-4886274",
+      "https://www.businessdailyafrica.com/bd/lifestyle/weekend-with-the-ceo/the-opportunity-that-came-knocking-on-corrinne-s-door-4886608"
+    ]
+  },
+  "daily-monitor-ug": {
+    "hostname": "www.monitor.co.ug",
+    "actions": [],
+    "test-urls": [
+      "https://www.monitor.co.ug/uganda/news/national/key-takeaways-from-3-day-african-union-summit-4887250#story",
+      "https://www.monitor.co.ug/uganda/news/national/harrowing-tale-of-costs-journey-through-mpox-4887278#story",
+      "https://www.monitor.co.ug/uganda/news/national/govt-scraps-1-000-university-courses-4887288#story"
+    ]
+  },
+  "standard-media-ke": {
+    "hostname": "www.standardmedia.co.ke",
+    "actions": [],
+    "test-urls": []
+  },
+  "mwananchi-tz": {
+    "hostname": "www.mwananchi.co.tz",
+    "actions": [],
+    "test-urls": [
+      "https://www.mwananchi.co.tz/mw/habari/kitaifa/uchaguzi-mabaraza-ni-vita-ya-mbowe-lissu-4887030",
+      "https://www.mwananchi.co.tz/mw/habari/makala/afya/simulizi-ya-aliyetolewa-uvimbe-wa-kilo-tano-kwenye-mfuko-wa-mayai-4884290",
+      "https://www.mwananchi.co.tz/mw/kolamu/tuchangamkie-fursa-na-maokoto-halali-4883112",
+      "https://www.mwananchi.co.tz/mw/zanzibar/simulizi-ya-mzee-kombo-aliyeongoza-vuguvugu-la-mapinduzi-4886150",
+      "https://www.mwananchi.co.tz/mw/habari/siasa/nondo-za-askofu-bagonza-uchaguzi-ccm-chadema-4886378",
+      "https://www.mwananchi.co.tz/mw/burudani/diamond-alivyojimilikisha-namba-moja--4885526"
+    ]
+  },
+  "new-vision-ug": {
+    "hostname": "www.newvision.co.ug",
+    "actions": [],
+    "test-urls": [
+      "https://www.newvision.co.ug/category/business/how-nasser-road-businesses-are-creating-many-NV_202979",
+      "https://www.newvision.co.ug/category/politics/kyagulanyi-stirs-political-storm-in-bukomansi-NV_202978",
+      "https://www.newvision.co.ug/category/report/from-dust-to-gold-how-ugandan-migrants-make-f-NV_202920",
+      "https://www.newvision.co.ug/category/politics/amins-letter-to-jimmy-carter-after-killing-ar-NV_202916",
+      "https://www.newvision.co.ug/category/entertainment/coming-clean-about-ugandas-dirty-music-perfor-NV_202829"
+    ]
+  },
+  "the-citizen-tz": {
+    "hostname": "www.thecitizen.co.tz",
+    "actions": [],
+    "test-urls": [
+      "https://www.thecitizen.co.tz/tanzania/news/national/sustainability-climate-risk-reporting-now-mandatory-for-banks-in-tanzania-4886846",
+      "https://www.thecitizen.co.tz/tanzania/news/national/investors-see-imminent-conclusion-of-tanzania-lng-talks-4886794",
+      "https://www.thecitizen.co.tz/tanzania/news/national/sustainability-climate-risk-reporting-now-mandatory-for-banks-in-tanzania-4886846",
+      "https://www.thecitizen.co.tz/tanzania/business/intra-africa-trade-falls-to-190bn-hit-by-tariff-barriers-geopolitical-tensions-sluggish-growth-4879108",
+      "https://www.thecitizen.co.tz/tanzania/business/tanzania-unveils-mining-sector-s-priorities-in-2025--4886922"
+    ]
+  },
+  "mwanaspoti-tz": {
+    "hostname": "www.mwanaspoti.co.tz",
+    "actions": [],
+    "test-urls": [
+      "https://www.mwanaspoti.co.tz/ms/soka/simba-yanga-hazichekani-4887034",
+      "https://www.mwanaspoti.co.tz/ms/kolamu/hisia-zangu-operesheni-luanda-na-nouakchott-zimefanikiwa-tukutane-kwa-mkapa-4887578",
+      "https://www.mwanaspoti.co.tz/ms/hadithi/hadithi-bomu-mkononi-17-4783960",
+      "https://www.mwanaspoti.co.tz/ms/kolamu/judgement-day-simba-vs-bravos-yanga-vs-al-hilal-utamu-uko-hapa-4885874",
+      "https://www.mwanaspoti.co.tz/ms/kolamu/jicho-la-mwewe-fundi-yusuf-kagoma-ni-wale-masela-wanaoishi-ghetto-4886828"
+    ]
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_extensionName__",
+  "description": "__MSG_extensionDescription__",
+  "version": "0.1.2",
+  "default_locale": "en",
+
+  "icons": {
+    "16": "icons/remix/newspaper-fill-16px.png",
+    "48": "icons/remix/newspaper-fill-48px.png",
+    "128": "icons/remix/newspaper-fill-128px.png"
+  },
+  "permissions": ["activeTab", "scripting", "tabs", "contextMenus", "storage"],
+  "host_permissions": [
+    "https://www.businessdailyafrica.com/",
+    "https://nation.africa/",
+    "https://www.theeastafrican.co.ke/",
+    "https://www.monitor.co.ug/",
+    "http://www.standardmedia.co.ke/",
+    "https://www.mwananchi.co.tz/",
+    "https://www.newvision.co.ug/",
+    "https://www.thecitizen.co.tz/",
+    "https://www.mwanaspoti.co.tz/"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": "icons/remix/newspaper-fill-48px.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  }
+}
