@@ -6,5 +6,9 @@
   "extensionDescription": {
     "message": "Unlockable is a browser extension that allows users to unlock content on websites like blogs, news sites, forums, articles, etc.",
     "description": "Description of the extension."
+  },
+  "extensionVersion": {
+    "message": "0.0.2",
+    "description": "Version of the extension."
   }
 }

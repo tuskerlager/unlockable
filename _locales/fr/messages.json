@@ -1,0 +1,14 @@
+{
+  "extensionName": {
+    "message": "Unlockable",
+    "description": "Nom de l'extension."
+  },
+  "extensionDescription": {
+    "message": "Unlockable est une extension de navigateur qui permet aux utilisateurs de débloquer du contenu sur des sites Web comme des blogs, des sites d'actualités, des forums, des articles, etc.",
+    "description": "Description de l'extension."
+  },
+  "extensionVersion": {
+    "message": "0.0.2",
+    "description": "Version de l'extension."
+  }
+}
