@@ -1,14 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap");
 
 :root {
+  /* Updating color scheme for consistent light mode */
   --primary-color: #007aff;
   --primary-hover: #0056b3;
-  --text-primary: #333;
-  --text-secondary: #666;
-  --text-muted: #999;
-  --bg-primary: #f5f5f5;
-  --bg-secondary: #ffffff;
-  --border-color: #eee;
+  --text-primary: #333333; /* Dark gray for main text */
+  --text-secondary: #666666; /* Medium gray for secondary text */
+  --text-muted: #999999; /* Light gray for less important text */
+  --bg-primary: #f5f5f5; /* Light gray background */
+  --bg-secondary: #ffffff; /* Pure white for component backgrounds */
+  --border-color: #eeeeee; /* Very light gray for borders */
   --shadow-color: rgba(0, 0, 0, 0.1);
   --blur-amount: 8px;
   --border-radius: 16px;
@@ -32,9 +33,7 @@ body {
   background-color: var(--bg-secondary);
   border-radius: var(--border-radius);
   padding: 1.25rem;
-  box-shadow: 
-    0 10px 30px var(--shadow-color),
-    0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 30px var(--shadow-color), 0 1px 3px rgba(0, 0, 0, 0.05);
   position: relative;
   overflow: hidden;
   backdrop-filter: blur(var(--blur-amount));
@@ -44,7 +43,7 @@ body {
 /* Glass effect background */
 .popup::before,
 .popup::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 100px;
   height: 100px;
@@ -90,7 +89,11 @@ h1 {
   font-weight: 700;
   font-size: 1.5rem;
   color: var(--text-primary);
-  background: linear-gradient(45deg, var(--primary-color), var(--primary-hover));
+  background: linear-gradient(
+    45deg,
+    var(--primary-color),
+    var(--primary-hover)
+  );
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -135,7 +138,11 @@ h1 {
   padding: 0.75rem 1.25rem;
   border: none;
   border-radius: 12px;
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--primary-hover)
+  );
   color: white;
   font-family: "Space Grotesk", sans-serif;
   font-size: 0.875rem;
@@ -147,7 +154,7 @@ h1 {
 }
 
 .action-btn::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -100%;
@@ -196,23 +203,6 @@ h1 {
 .footer a:hover .footer-icon {
   opacity: 1;
   transform: translateY(-2px);
-}
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text-primary: #f4f7fc;
-    --text-secondary: #dadada;
-    --text-muted: #888;
-    --bg-primary: #1a1a1a;
-    --bg-secondary: #2a2a2a;
-    --border-color: #333;
-    --shadow-color: rgba(0, 0, 0, 0.3);
-  }
-  
-  .version {
-    background: rgba(255, 255, 255, 0.1);
-  }
 }
 
 /* Loading state for buttons */

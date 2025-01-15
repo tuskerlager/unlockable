@@ -6,16 +6,21 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run build:firefox && npm run build:chromium",
-    "build:firefox": "webpack --config webpack/webpack.firefox.js",
-    "build:chromium": "webpack --config webpack/webpack.chromium.js",
-    "dev:firefox": "webpack --config webpack/webpack.firefox.js --watch",
-    "dev:chromium": "webpack --config webpack/webpack.chromium.js --watch"
+    "build:firefox": "webpack --config webpack/webpack.firefox.ts",
+    "build:chromium": "webpack --config webpack/webpack.chromium.ts",
+    "dev:firefox": "webpack --config webpack/webpack.firefox.ts --watch",
+    "dev:chromium": "webpack --config webpack/webpack.chromium.ts --watch"
   },
   "author": "tuskerlager",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
+    "@babel/preset-typescript": "^7.26.0",
+    "@types/chrome": "^0.0.296",
+    "@types/firefox": "^0.0.34",
+    "@types/node": "^22.10.6",
+    "@types/webpack": "^5.28.5",
     "babel-loader": "^9.2.1",
     "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^7.1.2",
@@ -24,6 +29,9 @@
     "jsonc-loader": "^0.1.1",
     "mini-css-extract-plugin": "^2.9.2",
     "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3",
     "webpack": "^5.97.1",
     "webpack-cli": "^6.0.1"
   }
