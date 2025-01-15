@@ -17,6 +17,29 @@
     "enabled": false,
     "description": ""
   },
+  "browsers": {
+    "firefox": {
+      "type": "firefox",
+      "description": ""
+    },
+    "chrome": {
+      "type": "chromium",
+      "description": ""
+    },
+    "edge": {
+      "type": "chromium",
+      "description": ""
+    },
+    "opera": {
+      "type": "chromium",
+      "description": ""
+    },
+    "unkown":{
+      "type": "uknown", // to handle other cases
+      "description": ""
+    }
+
+  },
   "advanced": {},
   "sites": {
     // TODO: make packing script load this value from site.json 
