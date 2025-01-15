@@ -1,6 +1,6 @@
 import path from "path";
 import { merge } from "webpack-merge";
-import common from "./webpack.common.js";
+import common from "./webpack.common.ts";
 import CopyPlugin from "copy-webpack-plugin";
 import { Configuration } from "webpack";
 

@@ -6,10 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run build:firefox && npm run build:chromium",
-    "build:firefox": "webpack --config webpack/webpack.firefox.js",
-    "build:chromium": "webpack --config webpack/webpack.chromium.js",
-    "dev:firefox": "webpack --config webpack/webpack.firefox.js --watch",
-    "dev:chromium": "webpack --config webpack/webpack.chromium.js --watch"
+    "build:firefox": "webpack --config webpack/webpack.firefox.ts",
+    "build:chromium": "webpack --config webpack/webpack.chromium.ts",
+    "dev:firefox": "webpack --config webpack/webpack.firefox.ts --watch",
+    "dev:chromium": "webpack --config webpack/webpack.chromium.ts --watch"
   },
   "author": "tuskerlager",
   "license": "MIT",
@@ -30,6 +30,7 @@
     "mini-css-extract-plugin": "^2.9.2",
     "style-loader": "^4.0.0",
     "ts-loader": "^9.5.2",
+    "ts-node": "^10.9.2",
     "typescript": "^5.7.3",
     "webpack": "^5.97.1",
     "webpack-cli": "^6.0.1"

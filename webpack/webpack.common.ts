@@ -8,7 +8,7 @@ import MiniCssExtractPlugin from "mini-css-extract-plugin";
 const config: Configuration = {
   entry: {
     content: path.resolve(__dirname, "../src/content/content.ts"),
-    background: path.resolve(__dirname, "../src/content/background.ts"),
+    background: path.resolve(__dirname, "../src/background/background.ts"),
     options: path.resolve(__dirname, "../src/options/options.ts"),
     popup: path.resolve(__dirname, "../src/popup/popup.ts"),
   },
@@ -21,6 +21,7 @@ const config: Configuration = {
       { test: /\.jsonc$/, use: "jsonc-loader" },
       // prettier-ignore
       { test: /\.ts$/, exclude: /node_modules/, use: { loader: "babel-loader", options: { presets: ["@babel/preset-env", "@babel/preset-typescript"],},},},
+      { test: /\.css$/, use: [MiniCssExtractPlugin.loader, "css-loader"] },
     ],
   },
 
