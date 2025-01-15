@@ -18,7 +18,7 @@ module.exports = {
       { test: /\.js$/, exclude: /node_modules/, use: "babel-loader" },
       { test: /\.(png|jpg|jpeg|gif)$/i, type: "asset/resource" },
       { test: /\.json$/, type: "json" },
-      { test: /\.jsonc$/, type: "json", use: "jsonc-loader" },
+      { test: /\.jsonc$/, use: "jsonc-loader" },
     ],
   },
 
