@@ -11,76 +11,167 @@
     <link rel="stylesheet" href="./popup.css">
 
     <style>
-        body {
-            font-family: 'Space Grotesk', sans-serif;
+        :root {
+            --primary-color: #007bff;
+            --text-primary: #333;
+            --text-secondary: #666;
+            --text-muted: #aaa;
+            --bg-primary: #f4f7fc;
+            --bg-secondary: #ffffff;
+            --bg-accent: #f1f3f5;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --blur-amount: 10px;
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f4f7fc;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', system-ui, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: clamp(1rem, 5vw, 3rem);
         }
 
         .container {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            width: 100%;
-            text-align: center;
+            background-color: var(--bg-secondary);
+            padding: clamp(1.5rem, 5vw, 3rem);
+            border-radius: 1rem;
+            box-shadow:
+                0 10px 30px var(--shadow-color),
+                0 1px 3px rgba(0, 0, 0, 0.05);
+            width: min(90%, 600px);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(var(--blur-amount));
+            -webkit-backdrop-filter: blur(var(--blur-amount));
+        }
+
+        /* Glass effect background circles */
+        .container::before,
+        .container::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            opacity: 0.1;
+            filter: blur(40px);
+            z-index: -1;
+        }
+
+        .container::before {
+            top: -75px;
+            left: -75px;
+        }
+
+        .container::after {
+            bottom: -75px;
+            right: -75px;
         }
 
         h2 {
-            font-size: 2rem;
-            color: #4a4a4a;
-            margin-bottom: 20px;
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
         }
 
         p {
-            font-size: 1.1rem;
+            font-size: clamp(1rem, 3vw, 1.1rem);
             line-height: 1.6;
-            color: #666;
-            margin-bottom: 15px;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
         }
 
         a {
-            color: #007bff;
+            color: var(--primary-color);
             text-decoration: none;
             font-weight: 500;
+            transition: all 0.3s ease;
         }
 
         a:hover {
             text-decoration: underline;
+            opacity: 0.8;
         }
 
         .footer {
-            font-size: 0.9rem;
-            color: #aaa;
-            margin-top: 30px;
-        }
-
-        .footer a {
-            color: #007bff;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
+            font-size: clamp(0.8rem, 2vw, 0.9rem);
+            color: var(--text-muted);
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--bg-accent);
         }
 
         .version-info {
-            background-color: #f1f3f5;
-            border-left: 4px solid #007bff;
-            padding: 10px;
+            background-color: var(--bg-accent);
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem;
+            margin-top: 1.5rem;
             font-style: italic;
-            margin-top: 20px;
+            border-radius: 0 0.5rem 0.5rem 0;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
         }
 
         .icon {
-            font-size: 20px;
-            margin-left: 8px;
+            font-size: clamp(1rem, 3vw, 1.25rem);
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text-primary: #f4f7fc;
+                --text-secondary: #dadada;
+                --text-muted: #888;
+                --bg-primary: #1a1a1a;
+                --bg-secondary: #2a2a2a;
+                --bg-accent: #333;
+                --shadow-color: rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        /* For ultra-wide screens */
+        @media screen and (min-width: 2000px) {
+            .container {
+                width: min(1200px, 90%);
+            }
+        }
+
+        /* For very small screens */
+        @media screen and (max-width: 380px) {
+            body {
+                padding: 0.5rem;
+            }
+
+            .container {
+                padding: 1rem;
+                width: 100%;
+                border-radius: 0.5rem;
+            }
+        }
+
+        /* For print */
+        @media print {
+            .container {
+                box-shadow: none;
+                width: 100%;
+                padding: 0;
+            }
+
+            .version-info {
+                border: 1px solid #ccc;
+            }
         }
     </style>
 </head>
@@ -88,7 +179,8 @@
 <body>
     <div class="container">
         <h2>About Unlockable</h2>
-        <p>Unlockable is a browser extension designed to help users unlock site content and ease the reading experience.</p>
+        <p>Unlockable is a browser extension designed to help users unlock site content and ease the reading experience.
+        </p>
         <ul>
             <li><a href="https://www.nation.africa/" target="_blank"><b>nation.africa</b></a></li>
             <li><a href="https://www.businessdailyafrica.com/" target="_blank"><b>businessdailyafrica.com</b></a></li>
@@ -100,7 +192,8 @@
             <li><a href="https://www.mwanaspoti.co.tz/" target="_blank"><b>mwanaspoti.co.tz</b></a></li>
             <li><a href="https://www.mwananchi.co.tz/" target="_blank"><b>mwananchi.co.tz</b></a></li>
         </ul>
-        <p>With Unlockable, you can read articles from various news sources, blogs, and more without being interrupted by
+        <p>With Unlockable, you can read articles from various news sources, blogs, and more without being interrupted
+            by
             barriers or other content restrictions.</p>
 
         <div class="version-info">
