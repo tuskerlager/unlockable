@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "__MSG_extensionName__",
   "description": "__MSG_extensionDescription__",
-  "version": "__MSG_extensionVersion__",
+  "version": "0.0.2",
   "default_locale": "en",
 
   "icons": {
@@ -26,7 +26,7 @@
     "service_worker": "background.js"
   },
   "action": {
-    "default_popup": "popup/popup.html",
+    "default_popup": "popup.html",
     "default_icon": "icons/remix/newspaper-fill-48px.png"
   },
   "content_scripts": [
@@ -37,7 +37,7 @@
     }
   ],
   "options_ui": {
-    "page": "options/options.html",
+    "page": "options.html",
     "open_in_tab": true
   }
 }

@@ -1,32 +1,32 @@
 // Listen for extension installation or update
 chrome.runtime.onInstalled.addListener(() => {
-  console.log("Paywaller installed!");
+  console.log("Unlockable installed!");
 
   // Create main context menu item
   chrome.contextMenus.create({
-    id: "paywallerMain",
-    title: "Paywaller",
+    id: "unlockableMains",
+    title: "Unlockable",
     contexts: ["all"]
   });
 
   // Create sub-menu items
   chrome.contextMenus.create({
     id: "unlockArticle",
-    parentId: "paywallerMain",
+    parentId: "unlockableMains",
     title: "🔓 Unlock Article",
     contexts: ["all"]
   });
 
   // chrome.contextMenus.create({
   //   id: "removeAds",
-  //   parentId: "paywallerMain",
+  //   parentId: "unlockableMains",
   //   title: "🚫 Remove Ads",
   //   contexts: ["all"]
   // });
 
   chrome.contextMenus.create({
     id: "clearCache",
-    parentId: "paywallerMain",
+    parentId: "unlockableMains",
     title: "🧹 Clear Site Cache",
     contexts: ["all"]
   });
@@ -34,7 +34,7 @@ chrome.runtime.onInstalled.addListener(() => {
   // Add separator
   chrome.contextMenus.create({
     id: "separator",
-    parentId: "paywallerMain",
+    parentId: "unlockableMains",
     type: "separator",
     contexts: ["all"]
   });
@@ -42,8 +42,8 @@ chrome.runtime.onInstalled.addListener(() => {
   // Add info item
   chrome.contextMenus.create({
     id: "info",
-    parentId: "paywallerMain",
-    title: "ℹ️ About Paywaller",
+    parentId: "unlockableMains",
+    title: "ℹ️ About Unlockable",
     contexts: ["all"]
   });
 });
@@ -54,9 +54,9 @@ function executeContentScript(tabId) {
       target: { tabId: tabId },
       files: ['./content.js']
   }).then(() => {
-      console.log("📰 Paywaller: script executed successfully");
+      console.log("Unlockable: script executed successfully");
   }).catch((err) => {
-      console.error("📰 Paywaller: Failed to execute content script:", err);
+      console.error("Unlockable: Failed to execute content script:", err);
   });
 }
 // Handle context menu clicks
@@ -65,18 +65,18 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 
   switch (info.menuItemId) {
     case "unlockArticle":
-      console.log("📰 Paywaller: Unlock Article clicked");
+      console.log("Unlockable: Unlock Article clicked");
       // alert("Attempting to unlock article...");
       executeContentScript(tab.id);
       break;
 
     // case "removeAds":
-    //   console.log("📰 Paywaller: Remove Ads clicked");
+    //   console.log("Unlockable: Remove Ads clicked");
     //   alert("Removing advertisements...");
     //   break;
 
     case "clearCache":
-      console.log("📰 Paywaller: Clear Cache clicked");
+      console.log("Unlockable: Clear Cache clicked");
       chrome.browsingData.remove({
         "origins": [tab.url]
       }, {
@@ -89,14 +89,9 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
       break;
 
     case "info":
-      console.log("📰 Paywaller: Info clicked");
-      // alert("Paywaller v1.0.0\nCreated to help bypass article paywalls");
-      // break;
-      chrome.windows.create({
-        url: chrome.runtime.getURL("./popup/about.html"),
-        type: "popup",
-        width: 400,
-        height: 500
+      console.log("Unlockable: Info clicked");
+      chrome.tabs.create({
+        url: chrome.runtime.getURL("./about.html")
       });
       break;
   }
@@ -105,7 +100,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 // Listen for extension icon click
 chrome.action.onClicked.addListener((tab) => {
   console.log("Extension icon clicked");
-  alert("Paywaller activated!");
+  alert("Unlockable activated!");
   // executeContentScript(tab.id); // TODO: See if I want this...
 });
 
