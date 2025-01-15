@@ -50,6 +50,8 @@ const config: Configuration = {
         { from: "src/icons", to: "icons" },
         { from: "src/config/config.jsonc", to: "config.jsonc" },
         { from: "src/config/sites.json", to: "sites.json" },
+        { from: "src/options/options.css", to: "options.css" },
+        // { from: "src/**/*.css", to: "[name][ext]" }
       ],
     }),
   ],

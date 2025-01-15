@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Extension Options</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="./options.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Extension Options</h1>
+      <div id="site-list">
+        <!-- Example of a dynamically rendered checkbox -->
+        <div class="site-item">
+          <label>
+            <input type="checkbox" id="example-site" />
+            <span></span>
+            <!-- Custom checkbox styling -->
+            Example Site
+          </label>
+        </div>
+      </div>
+      <button type="button" id="save-button">Save Changes</button>
+      <p id="status">Options saved successfully!</p>
+    </div>
+
+    <script src="./options.js"></script>
+  </body>
+</html>
