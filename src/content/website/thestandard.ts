@@ -1,5 +1,6 @@
 /** The Standard (KE) */
 export const hostname = "www.standardmedia.co.ke";
+export const title = "The Standard";
 
 // --- Remove elements based on classes they have from a parent element
 // NOT-EQUAL-TO Removing classes from an element (as defined elsewhere)
