@@ -26,7 +26,10 @@
 	  },
 	  "[shellscript]": {
 		// "editor.defaultFormatter": "foxundermoon.shell-format"
-	  }
+	},
+	"[jsonc]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	}
 	}
   }
   

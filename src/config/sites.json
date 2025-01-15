@@ -1,6 +1,7 @@
 {
   "nation-africa": {
     "hostname": "nation.africa",
+    "title": "Nation Africa",
     "actions": [],
     "js": "../content/site/nationAfrica.js",
     "test-urls": [
@@ -12,6 +13,7 @@
   },
   "the-east-african": {
     "hostname": "www.theeastafrican.co.ke",
+    "title": "The East African",
     "actions": [],
     "js": "../content/site/theEastAfrican.js",
     "test-urls": [
@@ -22,6 +24,7 @@
   },
   "business-daily-africa": {
     "hostname": "www.businessdailyafrica.com",
+    "title": "Business Daily Africa",
     "actions": [],
     "js": "../content/site/businessDailyAfrica.js",
     "test-urls": [
@@ -32,6 +35,7 @@
   },
   "daily-monitor-ug": {
     "hostname": "www.monitor.co.ug",
+    "title": "Daily Monitor",
     "actions": [],
     "test-urls": [
       "https://www.monitor.co.ug/uganda/news/national/key-takeaways-from-3-day-african-union-summit-4887250#story",
@@ -41,6 +45,7 @@
   },
   "standard-media-ke": {
     "hostname": "www.standardmedia.co.ke",
+    "title": "The Standard",
     "actions": [],
     "test-urls": [
       "https://www.standardmedia.co.ke/business/enterprise/article/2001509605/study-reveals-top-careers-with-highest-risk-of-job-loss-in-5-years"
@@ -48,6 +53,7 @@
   },
   "mwananchi-tz": {
     "hostname": "www.mwananchi.co.tz",
+    "title": "Mwananchi",
     "actions": [],
     "test-urls": [
       "https://www.mwananchi.co.tz/mw/habari/kitaifa/uchaguzi-mabaraza-ni-vita-ya-mbowe-lissu-4887030",
@@ -60,6 +66,7 @@
   },
   "new-vision-ug": {
     "hostname": "www.newvision.co.ug",
+    "title": "New Vision",
     "actions": [],
     "test-urls": [
       "https://www.newvision.co.ug/category/business/how-nasser-road-businesses-are-creating-many-NV_202979",
@@ -71,6 +78,7 @@
   },
   "the-citizen-tz": {
     "hostname": "www.thecitizen.co.tz",
+    "title": "The Citizen",
     "actions": [],
     "test-urls": [
       "https://www.thecitizen.co.tz/tanzania/news/national/sustainability-climate-risk-reporting-now-mandatory-for-banks-in-tanzania-4886846",
@@ -82,6 +90,7 @@
   },
   "mwanaspoti-tz": {
     "hostname": "www.mwanaspoti.co.tz",
+    "title": "Mwanaspoti",
     "actions": [],
     "test-urls": [
       "https://www.mwanaspoti.co.tz/ms/soka/simba-yanga-hazichekani-4887034",
