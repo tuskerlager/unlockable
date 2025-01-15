@@ -13,19 +13,12 @@ module.exports = {
 
   module: {
     rules: [
-      {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
-      },
-      {
-          test: /\.js$/,
-          exclude: /node_modules/,
-          use: 'babel-loader',
-      },
-      {
-        test: /\.(png|jpg|jpeg|gif)$/i,
-        type: "asset/resource",
-      },
+      // prettier-ignore
+      { test: /\.css$/, use: [MiniCssExtractPlugin.loader, "css-loader"] },
+      { test: /\.js$/, exclude: /node_modules/, use: "babel-loader" },
+      { test: /\.(png|jpg|jpeg|gif)$/i, type: "asset/resource" },
+      { test: /\.json$/, type: "json" },
+      { test: /\.jsonc$/, use: "jsonc-loader" },
     ],
   },
 
@@ -52,6 +45,8 @@ module.exports = {
       patterns: [
         { from: "_locales", to: "_locales" },
         { from: "src/icons", to: "icons" },
+        { from: "src/config/config.jsonc", to: "config.jsonc" },
+        { from: "src/config/sites.json", to: "sites.json" },
       ],
     }),
   ],
@@ -60,5 +55,18 @@ module.exports = {
     filename: "[name].js",
     path: path.resolve(__dirname, "../dist"),
     clean: true,
+  },
+
+  resolve: {
+    extensions: [".js", ".json", ".jsonc"],
+    modules: [path.resolve(__dirname, "src"), "node_modules"],
+    alias: {
+      "@": path.resolve(__dirname, "src"),
+      "@config": path.resolve(__dirname, "config"),
+      "@content": path.resolve(__dirname, "src/content"),
+      "@popup": path.resolve(__dirname, "src/popup"),
+      "@options": path.resolve(__dirname, "src/options"),
+      "@background": path.resolve(__dirname, "src/background"),
+    },
   },
 };
