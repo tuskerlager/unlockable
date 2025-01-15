@@ -34,21 +34,18 @@
       "type": "chromium",
       "description": ""
     },
-    "unkown":{
+    "unkown": {
       "type": "uknown", // to handle other cases
       "description": ""
     }
-
   },
   "advanced": {},
   "sites": {
-    // TODO: make packing script load this value from site.json 
-    // TODO: ... or webpack to copy from sites to here. maybe.
-    "nation-africa": {
+    "nation": {
       "hostname": "nation.africa",
       "title": "Nation Africa",
       "actions": [],
-      "js": "../content/site/nationAfrica.js",
+      "ts": "src/content/website/nation.ts",
       "test-urls": [
         "https://nation.africa/kenya/news/politics/after-gachagua-ouster-which-way-mt-kenya--4807706#story",
         "https://nation.africa/kenya/news/education/in-turkana-county-grade-a-in-kcse-remains-elusive-9-years-later-4886776#story",
@@ -56,50 +53,53 @@
         "https://nation.africa/kenya/nation-prime/kdf-shabaab-school-lectures-kenya-1924138"
       ]
     },
-    "the-east-african": {
+    "eastafrican": {
       "hostname": "www.theeastafrican.co.ke",
       "title": "The East African",
       "actions": [],
-      "js": "../content/site/theEastAfrican.js",
+      "ts": "src/content/website/eastafrican.ts",
       "test-urls": [
         "https://www.theeastafrican.co.ke/tea/business-tech/kenya-treasury-terms-banks-data-on-state-accounts-insincere-4885570",
         "https://www.theeastafrican.co.ke/tea/news/north-africa/in-sudan-war-everyone-is-enemy-at-some-point-4885644",
         "https://www.theeastafrican.co.ke/tea/sustainability/innovation/kenya-tanzania-lose-76-4m-to-censorship-4885688"
       ]
     },
-    "business-daily-africa": {
+    "businessdaily": {
       "hostname": "www.businessdailyafrica.com",
       "title": "Business Daily Africa",
       "actions": [],
-      "js": "../content/site/businessDailyAfrica.js",
+      "ts": "src/content/website/businessdaily.ts",
       "test-urls": [
         "https://www.businessdailyafrica.com/bd/corporate/companies/how-investment-income-handed-insurers-record-sh8-5bn-profit-4887028",
         "https://www.businessdailyafrica.com/bd/economy/kra-slows-down-on-m-pesa-paybills-tax-register-plan-4886274",
         "https://www.businessdailyafrica.com/bd/lifestyle/weekend-with-the-ceo/the-opportunity-that-came-knocking-on-corrinne-s-door-4886608"
       ]
     },
-    "daily-monitor-ug": {
+    "monitor": {
       "hostname": "www.monitor.co.ug",
       "title": "Daily Monitor",
       "actions": [],
+      "ts": "src/content/website/monitor.ts",
       "test-urls": [
         "https://www.monitor.co.ug/uganda/news/national/key-takeaways-from-3-day-african-union-summit-4887250#story",
         "https://www.monitor.co.ug/uganda/news/national/harrowing-tale-of-costs-journey-through-mpox-4887278#story",
         "https://www.monitor.co.ug/uganda/news/national/govt-scraps-1-000-university-courses-4887288#story"
       ]
     },
-    "standard-media-ke": {
+    "thestandard": {
       "hostname": "www.standardmedia.co.ke",
       "title": "The Standard",
       "actions": [],
+      "ts": "src/content/website/thestandard.ts",
       "test-urls": [
         "https://www.standardmedia.co.ke/business/enterprise/article/2001509605/study-reveals-top-careers-with-highest-risk-of-job-loss-in-5-years"
       ]
     },
-    "mwananchi-tz": {
+    "mwananchi": {
       "hostname": "www.mwananchi.co.tz",
       "title": "Mwananchi",
       "actions": [],
+      "ts": "src/content/website/mwananchi.ts",
       "test-urls": [
         "https://www.mwananchi.co.tz/mw/habari/kitaifa/uchaguzi-mabaraza-ni-vita-ya-mbowe-lissu-4887030",
         "https://www.mwananchi.co.tz/mw/habari/makala/afya/simulizi-ya-aliyetolewa-uvimbe-wa-kilo-tano-kwenye-mfuko-wa-mayai-4884290",
@@ -109,10 +109,11 @@
         "https://www.mwananchi.co.tz/mw/burudani/diamond-alivyojimilikisha-namba-moja--4885526"
       ]
     },
-    "new-vision-ug": {
+    "newvision": {
       "hostname": "www.newvision.co.ug",
       "title": "New Vision",
       "actions": [],
+      "ts": "src/content/website/newvision.ts",
       "test-urls": [
         "https://www.newvision.co.ug/category/business/how-nasser-road-businesses-are-creating-many-NV_202979",
         "https://www.newvision.co.ug/category/politics/kyagulanyi-stirs-political-storm-in-bukomansi-NV_202978",
@@ -121,10 +122,11 @@
         "https://www.newvision.co.ug/category/entertainment/coming-clean-about-ugandas-dirty-music-perfor-NV_202829"
       ]
     },
-    "the-citizen-tz": {
+    "thecitizen": {
       "hostname": "www.thecitizen.co.tz",
       "title": "The Citizen",
       "actions": [],
+      "ts": "src/content/website/thestandard.ts",
       "test-urls": [
         "https://www.thecitizen.co.tz/tanzania/news/national/sustainability-climate-risk-reporting-now-mandatory-for-banks-in-tanzania-4886846",
         "https://www.thecitizen.co.tz/tanzania/news/national/investors-see-imminent-conclusion-of-tanzania-lng-talks-4886794",
@@ -133,10 +135,11 @@
         "https://www.thecitizen.co.tz/tanzania/business/tanzania-unveils-mining-sector-s-priorities-in-2025--4886922"
       ]
     },
-    "mwanaspoti-tz": {
+    "mwanaspoti": {
       "hostname": "www.mwanaspoti.co.tz",
       "title": "Mwanaspoti",
       "actions": [],
+      "ts": "src/content/website/mwananchi.ts",
       "test-urls": [
         "https://www.mwanaspoti.co.tz/ms/soka/simba-yanga-hazichekani-4887034",
         "https://www.mwanaspoti.co.tz/ms/kolamu/hisia-zangu-operesheni-luanda-na-nouakchott-zimefanikiwa-tukutane-kwa-mkapa-4887578",

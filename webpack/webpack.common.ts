@@ -1,24 +1,27 @@
-const path = require("path");
-const CopyPlugin = require("copy-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+/** */
+import path from "path";
+import { Configuration } from "webpack";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import CopyPlugin from "copy-webpack-plugin";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
-module.exports = {
+const config: Configuration = {
   entry: {
-    background: "./src/background/background.js",
-    content: "./src/content/content.js",
-    popup: "./src/popup/popup.js",
-    options: "./src/options/options.js",
+    content: path.resolve(__dirname, "../src/content/content.ts"),
+    background: path.resolve(__dirname, "../src/background/background.ts"),
+    options: path.resolve(__dirname, "../src/options/options.ts"),
+    popup: path.resolve(__dirname, "../src/popup/popup.ts"),
   },
 
   module: {
     rules: [
-      // prettier-ignore
-      { test: /\.css$/, use: [MiniCssExtractPlugin.loader, "css-loader"] },
       { test: /\.js$/, exclude: /node_modules/, use: "babel-loader" },
       { test: /\.(png|jpg|jpeg|gif)$/i, type: "asset/resource" },
       { test: /\.json$/, type: "json" },
       { test: /\.jsonc$/, use: "jsonc-loader" },
+      // prettier-ignore
+      { test: /\.ts$/, exclude: /node_modules/, use: { loader: "babel-loader", options: { presets: ["@babel/preset-env", "@babel/preset-typescript"],},},},
+      { test: /\.css$/, use: [MiniCssExtractPlugin.loader, "css-loader"] },
     ],
   },
 
@@ -50,15 +53,13 @@ module.exports = {
       ],
     }),
   ],
-
   output: {
     filename: "[name].js",
     path: path.resolve(__dirname, "../dist"),
     clean: true,
   },
-
   resolve: {
-    extensions: [".js", ".json", ".jsonc"],
+    extensions: [".ts", ".js", ".json", ".jsonc"],
     modules: [path.resolve(__dirname, "src"), "node_modules"],
     alias: {
       "@": path.resolve(__dirname, "src"),
@@ -70,3 +71,5 @@ module.exports = {
     },
   },
 };
+
+export default config;
