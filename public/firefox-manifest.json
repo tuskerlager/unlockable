@@ -10,16 +10,6 @@
     "128": "icons/newspaper-fill-120px.png"
   },
   "permissions": ["activeTab", "scripting", "tabs", "contextMenus", "storage"],
-  "host_permissions": [
-    "https://www.businessdailyafrica.com/",
-    "https://nation.africa/",
-    "https://www.theeastafrican.co.ke/",
-    "https://www.monitor.co.ug/",
-    "http://www.standardmedia.co.ke/",
-    "https://www.mwananchi.co.tz/",
-    "https://www.newvision.co.ug/",
-    "https://www.thecitizen.co.tz/"
-  ],
   "background": {
     "scripts": ["background.js"]
   },
