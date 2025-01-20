@@ -1,3 +1,5 @@
+import { configManager, type SiteConfig } from "../config/config";
+
 // Load sites and render options
 function loadSites() {
   // Define an interface for our site structure

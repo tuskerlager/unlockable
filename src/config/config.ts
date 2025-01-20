@@ -1,5 +1,3 @@
-// config.ts
-
 // Define our core configuration types
 export interface SiteConfig {
   hostname: string;
@@ -53,35 +51,83 @@ const defaultConfig: ExtensionConfig = {
     nation: {
       hostname: "nation.africa",
       title: "Nation Africa",
-      enabled: true,
       actions: [],
       ts: "src/content/website/nation.ts",
+      enabled: true,
     },
     eastafrican: {
       hostname: "www.theeastafrican.co.ke",
       title: "The East African",
-      enabled: true,
       actions: [],
       ts: "src/content/website/eastafrican.ts",
+      enabled: true,
     },
-    // ... other sites following the same pattern
+    businessdaily: {
+      hostname: "www.businessdailyafrica.com",
+      title: "Business Daily Africa",
+      actions: [],
+      ts: "src/content/website/businessdaily.ts",
+      enabled: true,
+    },
+    monitor: {
+      hostname: "www.monitor.co.ug",
+      title: "Daily Monitor",
+      actions: [],
+      ts: "src/content/website/monitor.ts",
+      enabled: true,
+    },
+    thestandard: {
+      hostname: "www.standardmedia.co.ke",
+      title: "The Standard",
+      actions: [],
+      ts: "src/content/website/thestandard.ts",
+      enabled: true,
+    },
+    mwananchi: {
+      hostname: "www.mwananchi.co.tz",
+      title: "Mwananchi",
+      actions: [],
+      ts: "src/content/website/mwananchi.ts",
+      enabled: true,
+    },
+    newvision: {
+      hostname: "www.newvision.co.ug",
+      title: "New Vision",
+      actions: [],
+      ts: "src/content/website/newvision.ts",
+      enabled: true,
+    },
+    thecitizen: {
+      hostname: "www.thecitizen.co.tz",
+      title: "The Citizen",
+      actions: [],
+      ts: "src/content/website/thestandard.ts",
+      enabled: true,
+    },
+    mwanaspoti: {
+      hostname: "www.mwanaspoti.co.tz",
+      title: "Mwanaspoti",
+      actions: [],
+      ts: "src/content/website/mwananchi.ts",
+      enabled: true,
+    },
   },
   browsers: {
     firefox: {
       type: "firefox",
-      description: "Mozilla Firefox Browser",
+      description: "",
     },
     chrome: {
       type: "chromium",
-      description: "Google Chrome Browser",
+      description: "",
     },
     edge: {
       type: "chromium",
-      description: "Microsoft Edge Browser",
+      description: "",
     },
     opera: {
       type: "chromium",
-      description: "Opera Browser",
+      description: "",
     },
     unknown: {
       type: "unknown",
@@ -128,7 +174,7 @@ export class ConfigManager {
   // Check if a site is enabled
   public isSiteEnabled(hostname: string): boolean {
     const site = Object.values(this.config.sites).find(
-      (s) => s.hostname === hostname
+      (s) => s.hostname === hostname,
     );
     return site?.enabled ?? false;
   }
@@ -136,7 +182,7 @@ export class ConfigManager {
   // Toggle site status
   public async toggleSite(hostname: string, enabled: boolean): Promise<void> {
     const siteKey = Object.entries(this.config.sites).find(
-      ([_, site]) => site.hostname === hostname
+      ([_, site]) => site.hostname === hostname,
     )?.[0];
     if (siteKey && this.config.sites[siteKey]) {
       this.config.sites[siteKey].enabled = enabled;

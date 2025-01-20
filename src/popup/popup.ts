@@ -1,3 +1,4 @@
+import { configManager, type SiteConfig } from "../config/config";
 import "./popup.css";
 
 document.addEventListener("DOMContentLoaded", () => {

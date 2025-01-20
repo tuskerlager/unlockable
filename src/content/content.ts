@@ -1,5 +1,6 @@
 /** Main module */
 import { Website } from "./types";
+import { configManager, type SiteConfig } from "../config/config";
 
 // TODO: import from config with enabled/disabled
 import * as businessDailyAfrica from "./website/businessdaily";
