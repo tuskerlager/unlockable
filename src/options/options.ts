@@ -1,89 +1,73 @@
-import { configManager, type SiteConfig } from "../config/config";
+import { configManager, type ExtensionConfig } from "../config/config";
 
-// Load sites and render options
-function loadSites() {
-  // Define an interface for our site structure
-  interface Site {
-    hostname: string;
-    enabled: boolean;
+async function loadSettings() {
+  await configManager.loadConfig();
+  const config: ExtensionConfig = configManager.getConfig();
+
+  // Load sites
+  const siteList: HTMLElement | null = document.getElementById("site-list");
+  if (siteList) {
+    siteList.innerHTML = "";
+
+    Object.entries(config.sites).forEach(([key, site]) => {
+      const siteItem: HTMLDivElement = document.createElement("div");
+      siteItem.className = "site-item";
+      siteItem.innerHTML = `
+        <label>
+          <input type="checkbox" id="site-${key}" ${
+        site.enabled ? "checked" : ""
+      } />
+          ${site.title} (${site.hostname})
+        </label>
+      `;
+      siteList.appendChild(siteItem);
+    });
   }
 
-  interface Sites {
-    [key: string]: Site;
-  }
+  // -- Load other settings
+  const notificationsCheckbox = document.getElementById("notifications-enabled") as HTMLInputElement; // prettier-ignore
+  const debugModeCheckbox = document.getElementById("debug-mode") as HTMLInputElement; // prettier-ignore
+  const themeSelect = document.getElementById("theme-select") as HTMLSelectElement; // prettier-ignore
 
-  // Our sites configuration with proper typing
-  const sites: Sites = {
-    nation: { hostname: "nation.africa", enabled: true },
-    eastafrican: { hostname: "www.theeastafrican.co.ke", enabled: true },
-    businessdaily: { hostname: "www.businessdailyafrica.com", enabled: true },
-    citizen: { hostname: "www.thecitizen.co.tz", enabled: true },
-    monitor: { hostname: "www.monitor.co.ug", enabled: true },
-    mwananchi: { hostname: "www.mwananchi.co.tz", enabled: true },
-    mwanaspoti: { hostname: "www.mwanaspoti.co.tz", enabled: true },
-    newvision: { hostname: "www.newvision.co.ug", enabled: true },
-  };
-
-  const siteList = document.getElementById("site-list");
-  if (!siteList) return;
-
-  siteList.innerHTML = "";
-
-  // Create site items with proper typing
-  Object.entries(sites).forEach(([key, site]) => {
-    const siteItem = document.createElement("div");
-    siteItem.className = "site-item";
-    siteItem.innerHTML = `
-      <label>
-        <input type="checkbox" id="${key}" ${site.enabled ? "checked" : ""} />
-        ${site.hostname}
-      </label>
-    `;
-    siteList.appendChild(siteItem);
-  });
+  if (notificationsCheckbox) { notificationsCheckbox.checked = config.notifications.enabled; } // prettier-ignore
+  if (debugModeCheckbox) { debugModeCheckbox.checked = config.debugMode.enabled; } // prettier-ignore
+  if (themeSelect) { themeSelect.value = config.theme.value; } // prettier-ignore
 }
 
-// Save changes with proper type checking
-function saveChanges() {
-  // Use type assertion with querySelectorAll
-  const siteCheckboxes = document.querySelectorAll<HTMLInputElement>(
-    "#site-list input[type='checkbox']"
-  );
+async function saveChanges() {
+  const config = configManager.getConfig();
 
-  const siteSettings: Record<string, boolean> = {};
-
-  siteCheckboxes.forEach((checkbox) => {
-    siteSettings[checkbox.id] = checkbox.checked;
-  });
-
-  chrome.storage.sync.set({ siteSettings }, () => {
-    const status = document.getElementById("status");
-    if (status) {
-      status.style.display = "block";
-      setTimeout(() => {
-        status.style.display = "none";
-      }, 2000);
+  // Save sites
+  Object.keys(config.sites).forEach((key) => {
+    const checkbox = document.getElementById(`site-${key}`) as HTMLInputElement;
+    if (checkbox) {
+      config.sites[key].enabled = checkbox.checked;
     }
   });
+
+  // Save other settings
+  const notificationsCheckbox = document.getElementById("notifications-enabled") as HTMLInputElement; // prettier-ignore
+  const debugModeCheckbox = document.getElementById("debug-mode") as HTMLInputElement; // prettier-ignore
+  const themeSelect = document.getElementById("theme-select") as HTMLSelectElement; // prettier-ignore
+
+  if (notificationsCheckbox) { config.notifications.enabled = notificationsCheckbox.checked; } // prettier-ignore
+  if (debugModeCheckbox) { config.debugMode.enabled = debugModeCheckbox.checked; } // prettier-ignore
+  if (themeSelect) { config.theme.value = themeSelect.value as "light" | "dark" | "system"; } // prettier-ignore
+
+  await configManager.saveConfig();
+
+  // Show status
+  const status = document.getElementById("status");
+  if (status) {
+    status.style.display = "block";
+    setTimeout(() => {
+      status.style.display = "none";
+    }, 2000);
+  }
 }
 
-// Load saved settings with proper type checking
-function loadSavedSettings() {
-  chrome.storage.sync.get("siteSettings", (data) => {
-    const siteSettings = data.siteSettings || {};
-    Object.entries(siteSettings).forEach(([key, enabled]) => {
-      const checkbox = document.getElementById(key) as HTMLInputElement | null;
-      if (checkbox) {
-        checkbox.checked = enabled as boolean;
-      }
-    });
-  });
-}
-
-// Initialize with proper event handling
 document.addEventListener("DOMContentLoaded", () => {
-  loadSites();
-  loadSavedSettings();
+  loadSettings();
 
   const saveButton = document.getElementById("save-button");
   if (saveButton) {

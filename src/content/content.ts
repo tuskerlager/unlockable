@@ -27,7 +27,8 @@ const websites: Website[] = [
 ];
 
 /** */
-function main(): void {
+async function main(): Promise<void> {
+  await configManager.loadConfig(); // load config
   const tabHostname: string = window.location.hostname;
 
   // check if enabled in config/options/popup

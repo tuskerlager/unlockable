@@ -2,9 +2,9 @@
 export interface SiteConfig {
   hostname: string;
   title: string;
-  enabled: boolean;
-  actions: string[];
-  ts: string;
+  enabled: boolean; // on/off
+  actions: string[]; // for generics; workflow to unlock site
+  ts: string; // typescript-source file, but irrelevant for compiled webpack
 }
 
 export interface BrowserConfig {
@@ -173,16 +173,16 @@ export class ConfigManager {
 
   // Check if a site is enabled
   public isSiteEnabled(hostname: string): boolean {
-    const site = Object.values(this.config.sites).find(
-      (s) => s.hostname === hostname,
+    const site: SiteConfig | undefined = Object.values(this.config.sites).find(
+      (s) => s.hostname === hostname
     );
     return site?.enabled ?? false;
   }
 
   // Toggle site status
   public async toggleSite(hostname: string, enabled: boolean): Promise<void> {
-    const siteKey = Object.entries(this.config.sites).find(
-      ([_, site]) => site.hostname === hostname,
+    const siteKey: string | undefined = Object.entries(this.config.sites).find(
+      ([_, site]) => site.hostname === hostname
     )?.[0];
     if (siteKey && this.config.sites[siteKey]) {
       this.config.sites[siteKey].enabled = enabled;
@@ -213,6 +213,10 @@ export class ConfigManager {
     if (userAgent.includes("chrome")) return "chrome";
     if (userAgent.includes("opera")) return "opera";
     return "unknown";
+  }
+
+  public getConfig(): ExtensionConfig {
+    return this.config;
   }
 }
 
