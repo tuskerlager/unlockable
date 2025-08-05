@@ -7,7 +7,7 @@ export async function handle(): Promise<void> {
   
     try {
       // Fetch the raw HTML source of the page
-      const response: Response = await fetch(url, { method: "GET", headers: { "Content-Type": "text/html",},} );
+      const response: Response = await fetch(url, { method: "GET", headers: { "Content-Type": "text/html",}, cache: "no-cache",}); // added caching to control fetch request
       if (!response.ok) { console.error( "Unlockable: Failed to fetch page source:", response.statusText ); return; }
       const rawHTML: string = await response.text(); // Get the HTML as plain text
   
@@ -67,19 +67,12 @@ export async function handle(): Promise<void> {
         if (divs.length === 0) { console.log(`Unlockable: No divs found with class: ${className}`); }
       });
   
-      // Serialize the modified HTML back into a string
-      const editedHTML: string = doc.documentElement.outerHTML;
-  
-      // Open a new tab and render the edited HTML
-      const newTab: Window | null = window.open(); // Open a new blank tab
-      if (newTab) {
-        newTab.document.open(); // Open the document for writing
-        newTab.document.write(editedHTML); // Write the edited HTML into the new tab
-        newTab.document.close(); // Close the document
-      } else {
-        console.error("Unlockable: Failed to open a new tab!");
-      }
+      // Replace current document with modified content
+      document.documentElement.innerHTML = doc.documentElement.innerHTML;
+
+      // Clean up to prevent content script re-execution
+      document.querySelectorAll('script[src*="content.js"]').forEach(script => { script.remove();});
     } catch (error) {
-      console.error( "Unlockable: Error fetching or editing page source:", error );
+      console.error("Unlockable: Error processing page:", error);
     }
   }
