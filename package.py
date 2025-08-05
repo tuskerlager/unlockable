@@ -49,7 +49,7 @@ def usage() -> None:
     print("Usage: unlockable.py -v|--version <version> -b|--browser <browser>")
     print("Example: unlockable.py -v 0.1.1 -b firefox")
     print("Available browsers: chromium, firefox")
-    sys.exit(status=1)
+    raise SystemExit(1)
 
 # -- Available browsers
 # valid_browsers: list[str] = ["chrome", "firefox", "edge", "opera"]
@@ -78,13 +78,13 @@ browser = args.browser
 # TODO: make more robust, allow 4-digits if Firefox and Chrome allow it
 if not re.match(pattern=r"^\d+\.\d+\.\d+$", string=version):
     print("Error: Version must be in format x.x.x (e.g., 0.1.1)")
-    sys.exit(status=1)
+    sys.exit(1)
 
 # -- Validate browser
 if browser not in valid_browsers:
     print(f"Error: Invalid browser specified")
     print(f"Available browsers: {', '.join(valid_browsers)}")
-    sys.exit(status=1)
+    sys.exit(1)
 
 # -- Array of files/directories to include
 # TODO: reintroduce array of files/directory to exclude
@@ -128,7 +128,7 @@ def create_zip() -> None:
         # If any files are missing, exit
         if missing_files:
             print(f"Error ❗: Missing files: {', '.join(missing_files)}")
-            sys.exit(status=1)
+            sys.exit(1)
 
         # Start copying files
         print("Copying files... ⏳")
