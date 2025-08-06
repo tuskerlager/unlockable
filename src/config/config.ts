@@ -1,4 +1,4 @@
-// Define our core configuration types
+/** Configuration for specific websites */
 export interface SiteConfig {
   hostname: string;
   title: string;
@@ -7,42 +7,46 @@ export interface SiteConfig {
   ts: string; // typescript-source file, but irrelevant for compiled webpack
 }
 
+/** Browser specific settings */
+// https://medium.com/@jonbiro/browser-engines-chromium-v8-blink-gecko-webkit-98d6b0490968
 export interface BrowserConfig {
   type: "firefox" | "chromium" | "unknown";
   description: string;
 }
 
+/** Theme */
 export interface ThemeConfig {
   value: "light" | "dark" | "system";
   options: string[];
 }
 
+/** Config for the extension itself */
 export interface ExtensionConfig {
-  version: string;
+  version: string; // read from manifest/config.jsonc
   notifications: {
-    enabled: boolean;
+    enabled: boolean; // TODO: handle sending notifications to user & triggers
   };
-  theme: ThemeConfig;
+  theme: ThemeConfig; // TODO: implement dark-mode/light-mode
   debugMode: {
-    enabled: boolean;
+    enabled: boolean; // TODO: implement debug mode
   };
   sites: {
-    [key: string]: SiteConfig;
+    [key: string]: SiteConfig; // TODO: handle site-on/site-off setting and popup functionality
   };
   browsers: {
-    [key: string]: BrowserConfig;
+    [key: string]: BrowserConfig; // TODO: specify firefox/chromium/unknown (incl. webkit) differences
   };
 }
 
 // Our default configuration
 const defaultConfig: ExtensionConfig = {
-  version: "0.0.2",
+  version: "0.0.3", // FIXME: read from manifest/config.jsonc
   notifications: {
     enabled: true,
   },
   theme: {
     value: "system",
-    options: ["light", "dark", "system"],
+    options: ["light", "dark", "system"], // if system, use OS theme
   },
   debugMode: {
     enabled: false,
@@ -138,13 +142,22 @@ const defaultConfig: ExtensionConfig = {
 
 // Configuration management class
 export class ConfigManager {
-  private static instance: ConfigManager;
-  private config: ExtensionConfig;
+  /** ConfigManager class is a Singleton class;
+   * Static property declaration within this class to hold a single instance; 
+   * Singleton pattern ensures only one instance of the class is created and
+   * provides a single point of access to it for any other code.
+  */
+  private static instance: ConfigManager; // Singleton instance
+  /** Extension configuration instance */
+  private config: ExtensionConfig; // instance of extension configuration
+  /** storageKey is a constant property of of this class that cant be changed once initialised (readonly) */
+  private readonly storageKey = "extensionConfig";
 
-  private constructor() {
-    this.config = defaultConfig;
-  }
+  private constructor() { this.config = defaultConfig; } // singular instance of extension configuration; part of Singleton pattern
 
+  /** Key component of Singleton pattern; 
+   * ensures only one instance of the class is created and provides a single point
+   *  of access to it for any other code */
   public static getInstance(): ConfigManager {
     if (!ConfigManager.instance) {
       ConfigManager.instance = new ConfigManager();
@@ -152,67 +165,57 @@ export class ConfigManager {
     return ConfigManager.instance;
   }
 
-  // Load saved configuration from storage
+  /** Site configuration management */
+  public getSite(hostname: string): SiteConfig | undefined {
+    return Object.values(this.config.sites).find(
+      (s) => s.hostname === hostname
+    );
+  }
+
+  public async updateSite(
+    hostname: string,
+    updates: Partial<SiteConfig>
+  ): Promise<void> {
+    const siteKey = Object.entries(this.config.sites).find(
+      ([_, site]) => site.hostname === hostname
+    )?.[0];
+
+    if (siteKey) {
+      this.config.sites[siteKey] = {
+        ...this.config.sites[siteKey],
+        ...updates,
+      };
+      await this.saveConfig();
+    }
+  }
+
+  // Unified settings management
+  public async updateSettings(
+    updates: Partial<ExtensionConfig>
+  ): Promise<void> {
+    this.config = {
+      ...this.config,
+      ...updates,
+    };
+    await this.saveConfig();
+  }
+
+  // Simplified storage operations
   public async loadConfig(): Promise<void> {
     return new Promise((resolve) => {
-      chrome.storage.sync.get("extensionConfig", (data) => {
-        if (data.extensionConfig) {
-          this.config = { ...this.config, ...data.extensionConfig };
+      chrome.storage.sync.get(this.storageKey, (data) => {
+        if (data[this.storageKey]) {
+          this.config = { ...defaultConfig, ...data[this.storageKey] };
         }
         resolve();
       });
     });
   }
 
-  // Save current configuration to storage
   public async saveConfig(): Promise<void> {
     return new Promise((resolve) => {
-      chrome.storage.sync.set({ extensionConfig: this.config }, resolve);
+      chrome.storage.sync.set({ [this.storageKey]: this.config }, resolve);
     });
-  }
-
-  // Check if a site is enabled
-  public isSiteEnabled(hostname: string): boolean {
-    const site: SiteConfig | undefined = Object.values(this.config.sites).find(
-      (s) => s.hostname === hostname
-    );
-    return site?.enabled ?? false;
-  }
-
-  // Toggle site status
-  public async toggleSite(hostname: string, enabled: boolean): Promise<void> {
-    const siteKey: string | undefined = Object.entries(this.config.sites).find(
-      ([_, site]) => site.hostname === hostname
-    )?.[0];
-    if (siteKey && this.config.sites[siteKey]) {
-      this.config.sites[siteKey].enabled = enabled;
-      await this.saveConfig();
-    }
-  }
-
-  // Get current theme
-  public getTheme(): string {
-    return this.config.theme.value;
-  }
-
-  // Check if notifications are enabled
-  public areNotificationsEnabled(): boolean {
-    return this.config.notifications.enabled;
-  }
-
-  // Check if debug mode is enabled
-  public isDebugEnabled(): boolean {
-    return this.config.debugMode.enabled;
-  }
-
-  // Get browser type
-  public getBrowserType(): string {
-    const userAgent = navigator.userAgent.toLowerCase();
-    if (userAgent.includes("firefox")) return "firefox";
-    if (userAgent.includes("edge")) return "edge";
-    if (userAgent.includes("chrome")) return "chrome";
-    if (userAgent.includes("opera")) return "opera";
-    return "unknown";
   }
 
   public getConfig(): ExtensionConfig {

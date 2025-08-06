@@ -2,6 +2,7 @@
 <html>
 
 <head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Extension Options</title>
   <link rel="stylesheet" href="./options.css" />
@@ -9,39 +10,65 @@
 
 <body>
   <div class="container">
-    <h1>Extension Options</h1>
+    <h1>Extension Settings</h1>
 
-    <h2>Sites</h2>
-    <div id="site-list"></div>
-
-    <h2>General Settings</h2>
-    <div class="settings-group">
-      <div class="setting-item">
-        <label>
-          <input type="checkbox" id="notifications-enabled" />
-          Enable Notifications
-        </label>
+    <section class="settings-section">
+      <h2>News Sites</h2>
+      <div id="site-list" class="site-list-container">
+        <!-- Sites will be dynamically populated -->
       </div>
+    </section>
 
-      <div class="setting-item">
-        <label>
-          <input type="checkbox" id="debug-mode" />
-          Debug Mode
-        </label>
-      </div>
+    <section class="settings-section">
+      <h2>Preferences</h2>
+      <div class="settings-group">
+        <div class="setting-item">
+          <label class="setting-label">
+            <input type="checkbox" id="notifications-enabled" />
+            Enable Notifications
+            <span class="setting-description">Receive updates about new features and important changes</span>
+          </label>
+        </div>
 
-      <div class="setting-item">
-        <label for="theme-select">Theme:</label>
-        <select id="theme-select">
-          <option value="light">Light</option>
-          <option value="dark">Dark</option>
-          <option value="system">System</option>
-        </select>
+        <div class="setting-item">
+          <label class="setting-label">Theme</label>
+          <select id="theme-select" class="setting-input">
+            <option value="system">Match System Theme</option>
+            <option value="light">Light Mode</option>
+            <option value="dark">Dark Mode</option>
+          </select>
+        </div>
+
+        <div class="setting-item">
+          <label class="setting-label">
+            <input type="checkbox" id="debug-mode" />
+            Debug Mode
+            <span class="setting-description">Enable detailed logging for troubleshooting</span>
+          </label>
+        </div>
       </div>
+    </section>
+
+    <section class="settings-section">
+      <h2>Browser Information</h2>
+      <div id="browser-info" class="info-container">
+        <div class="info-item">
+          <span class="info-label">Browser:</span>
+          <span id="browser-type" class="info-value"></span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Version:</span>
+          <span id="extension-version" class="info-value"></span>
+        </div>
+      </div>
+    </section>
+
+    <div class="actions-container">
+      <button type="button" id="save-button" class="primary-button">Save Changes</button>
+      <button type="button" id="reset-button" class="secondary-button">Reset to Defaults</button>
     </div>
 
-    <button type="button" id="save-button">Save Changes</button>
-    <p id="status">Options saved successfully!</p>
+    <div id="status" class="status-message" role="alert" aria-live="polite"></div>
   </div>
 
   <script src="./options.js"></script>

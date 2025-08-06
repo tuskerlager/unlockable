@@ -19,6 +19,11 @@ const config: Configuration = {
       { test: /\.(png|jpg|jpeg|gif)$/i, type: "asset/resource" },
       { test: /\.json$/, type: "json" },
       { test: /\.jsonc$/, use: "jsonc-loader" },
+      // { test: /\.jsonc$/, use: "jsonc-loader", parser: {
+      //   parse: (input) => {
+      //     // Strip comments from JSONC
+      //     return JSON.parse(input.replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, ''));
+      //   } },},
       // prettier-ignore
       { test: /\.ts$/, exclude: /node_modules/, use: { loader: "babel-loader", options: { presets: ["@babel/preset-env", "@babel/preset-typescript"],},},},
       { test: /\.css$/, use: [MiniCssExtractPlugin.loader, "css-loader"] },

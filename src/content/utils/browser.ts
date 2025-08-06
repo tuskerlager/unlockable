@@ -3,10 +3,23 @@ import { BrowserConfig, Browsers } from '../types';
 import config from '../../config/config.jsonc';
 
 function detectBrowser(): string {
-    const userAgent: string = navigator.userAgent;
+    // const userAgent: string = navigator.userAgent;
+    const userAgent: string = navigator.userAgent.toLowerCase();
     
     // TODO: test and verify user agent strings; double-check
-    return "";
+    if (userAgent.includes('firefox')) {
+        return 'firefox';
+      } else if (userAgent.includes('edg/')) {
+        return 'edge';
+      } else if (userAgent.includes('chrome') && !userAgent.includes('edg/')) {
+        return 'chrome';
+      } else if (userAgent.includes('safari') && !userAgent.includes('chrome')) {
+        return 'safari';
+      } else if (userAgent.includes('opera') || userAgent.includes('opr/')) {
+        return 'opera';
+      }
+      
+      return 'unknown';
 }
 
 function configureBrowser(): void {

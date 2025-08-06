@@ -1,6 +1,6 @@
 /** Main module */
 import { Website } from "./types";
-import { configManager, type SiteConfig } from "../config/config";
+import { configManager, SiteConfig } from "../config/config";
 
 // TODO: import from config with enabled/disabled
 import * as businessDailyAfrica from "./website/businessdaily";
@@ -28,18 +28,18 @@ const websites: Website[] = [
 
 /** */
 async function main(): Promise<void> {
-  await configManager.loadConfig(); // load config
+  await configManager.loadConfig();
   const tabHostname: string = window.location.hostname;
 
-  // check if enabled in config/options/popup
-  const website: Website | undefined = websites.find(
-    (website: Website): boolean => {
-      return website.hostname === tabHostname;
-    }
-  );
+  const site: SiteConfig | undefined = configManager.getSite(tabHostname);
+  if (!site?.enabled) {
+    return;
+  }
 
-  // prettier-ignore
-  if (website) { website.handle(); } else { ; } // no-op }
+  const website: Website | undefined = websites.find((w) => w.hostname === tabHostname);
+  if (website) {
+    website.handle();
+  }
 }
 
 main();
