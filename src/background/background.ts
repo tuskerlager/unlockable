@@ -53,7 +53,7 @@ function executeContentScript(tabId: number): void {
   chrome.scripting
     .executeScript({
       target: { tabId: tabId },
-      files: ["./content.ts"],
+      files: ["./content.js"],
     })
     .then((): void => { console.log("Unlockable: script executed successfully"); })
     .catch((err: Error): void => { console.error("Unlockable: Failed to execute content script:", err); });
@@ -109,8 +109,9 @@ chrome.contextMenus.onClicked.addListener(
 // Listen for extension icon click
 chrome.action.onClicked.addListener((tab) => {
   console.log("Extension icon clicked");
-  alert("Unlockable activated!");
-  // executeContentScript(tab.id); // TODO: See if I want this...
+  if (tab.id !== undefined) {
+    executeContentScript(tab.id);
+  }
 });
 
 // Listen for messages (just logging)

@@ -1,5 +1,7 @@
 // Add type definition for the 'browser' object
 declare const browser: any;
+type OnClickData = any;
+type Tab = { id?: number; url?: string };
 
 // Listen for extension installation or update
 browser.runtime.onInstalled.addListener((): void => {

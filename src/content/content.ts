@@ -29,14 +29,14 @@ const websites: Website[] = [
 /** */
 async function main(): Promise<void> {
   await configManager.loadConfig();
-  const tabHostname: string = window.location.hostname;
+  const tabHostname: string = window.location.hostname.replace(/^www\./, "");
 
   const site: SiteConfig | undefined = configManager.getSite(tabHostname);
   if (!site?.enabled) {
     return;
   }
 
-  const website: Website | undefined = websites.find((w) => w.hostname === tabHostname);
+  const website: Website | undefined = websites.find((w) => w.hostname === tabHostname || w.hostname === `www.${tabHostname}`);
   if (website) {
     website.handle();
   }

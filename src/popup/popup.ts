@@ -1,4 +1,5 @@
 import { configManager, type SiteConfig } from "../config/config";
+import type { Tab } from "../content/types";
 import "./popup.css";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -29,8 +30,17 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- 🧹 Clearing Cache
   const clearCacheButton = document.getElementById("clear-cache");
   clearCacheButton?.addEventListener("click", () => {
-    chrome.tabs.query({ active: true, currentWindow: true }, () => {
-      alert("Cache cleared successfully");
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs: Tab[]) => {
+      const tab = tabs[0];
+      if (!tab?.id || !tab.url) return;
+      const origin = new URL(tab.url).origin;
+      chrome.browsingData.remove({ origins: [origin] }, {
+        cacheStorage: true,
+        cookies: true,
+        localStorage: true,
+      }, () => {
+        chrome.tabs.reload(tab.id!);
+      });
     });
   });
 

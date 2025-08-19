@@ -67,14 +67,14 @@ const config: Configuration = {
   },
   resolve: {
     extensions: [".ts", ".js", ".json", ".jsonc"],
-    modules: [path.resolve(__dirname, "src"), "node_modules"],
+    modules: [path.resolve(__dirname, "../src"), "node_modules"],
     alias: {
-      "@": path.resolve(__dirname, "src"),
-      "@config": path.resolve(__dirname, "config"),
-      "@content": path.resolve(__dirname, "src/content"),
-      "@popup": path.resolve(__dirname, "src/popup"),
-      "@options": path.resolve(__dirname, "src/options"),
-      "@background": path.resolve(__dirname, "src/background"),
+      "@": path.resolve(__dirname, "../src"),
+      "@config": path.resolve(__dirname, "../src/config"),
+      "@content": path.resolve(__dirname, "../src/content"),
+      "@popup": path.resolve(__dirname, "../src/popup"),
+      "@options": path.resolve(__dirname, "../src/options"),
+      "@background": path.resolve(__dirname, "../src/background"),
     },
   },
 };

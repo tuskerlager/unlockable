@@ -8,6 +8,8 @@ class OptionsManager {
     this.renderSiteList(config);
     this.renderSettings(config);
     this.setupEventListeners();
+
+    this.renderBrowserInfo();
   }
 
   private renderSiteList(config: ExtensionConfig) {
@@ -52,6 +54,11 @@ class OptionsManager {
       this.showSaveStatus();
     });
 
+    document.getElementById("reset-button")?.addEventListener("click", async () => {
+      await configManager.resetToDefaults();
+      await this.initializeUI();
+    });
+
     // Delegate site toggles
     document.getElementById("site-list")?.addEventListener("change", async (e) => {
       const checkbox = e.target as HTMLInputElement;
@@ -82,6 +89,25 @@ class OptionsManager {
     if (status) {
       status.style.display = "block";
       setTimeout(() => status.style.display = "none", 2000);
+    }
+  }
+
+  private renderBrowserInfo() {
+    const browserType = document.getElementById("browser-type");
+    const versionEl = document.getElementById("extension-version");
+    if (browserType) {
+      const ua = navigator.userAgent.toLowerCase();
+      let name = "Unknown";
+      if (ua.includes('firefox')) name = 'Firefox';
+      else if (ua.includes('edg/')) name = 'Edge';
+      else if (ua.includes('chrome') && !ua.includes('edg/')) name = 'Chrome';
+      else if (ua.includes('safari') && !ua.includes('chrome')) name = 'Safari';
+      else if (ua.includes('opr/') || ua.includes('opera')) name = 'Opera';
+      browserType.textContent = name;
+    }
+    if (versionEl) {
+      const runtime = (typeof chrome !== 'undefined' ? chrome.runtime : (window as any).browser.runtime);
+      versionEl.textContent = runtime.getManifest().version;
     }
   }
 }

@@ -10,7 +10,7 @@
     "48": "icons/remix/newspaper-fill-48px.png",
     "128": "icons/remix/newspaper-fill-128px.png"
   },
-  "permissions": ["activeTab", "scripting", "tabs", "contextMenus", "storage"],
+  "permissions": ["activeTab", "scripting", "tabs", "contextMenus", "storage", "browsingData"],
   "background": {
     "service_worker": "background.js"
   },

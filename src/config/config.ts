@@ -10,7 +10,7 @@ export interface SiteConfig {
 /** Browser specific settings */
 // https://medium.com/@jonbiro/browser-engines-chromium-v8-blink-gecko-webkit-98d6b0490968
 export interface BrowserConfig {
-  type: "firefox" | "chromium" | "unknown";
+  type: "firefox" | "chromium" | "webkit" |"unknown"; // TODO: handle/double-check webkit option
   description: string;
 }
 
@@ -119,19 +119,19 @@ const defaultConfig: ExtensionConfig = {
   browsers: {
     firefox: {
       type: "firefox",
-      description: "",
+      description: "Mozilla Firefox",
     },
     chrome: {
       type: "chromium",
-      description: "",
+      description: "Google Chrome",
     },
     edge: {
       type: "chromium",
-      description: "",
+      description: "Microsoft Edge",
     },
     opera: {
       type: "chromium",
-      description: "",
+      description: "Opera Browser",
     },
     unknown: {
       type: "unknown",
@@ -202,8 +202,16 @@ export class ConfigManager {
 
   // Simplified storage operations
   public async loadConfig(): Promise<void> {
-    return new Promise((resolve) => {
-      chrome.storage.sync.get(this.storageKey, (data) => {
+    return new Promise((resolve, reject) => {
+      const storageAPI = typeof chrome !== 'undefined' ? chrome.storage : (typeof browser !== 'undefined' ? browser.storage : undefined);
+      if (!storageAPI) { resolve(); return; }
+      
+      storageAPI.sync.get(this.storageKey, (data: { [x: string]: ExtensionConfig; }) => {
+        if ((typeof chrome !== 'undefined' ? chrome.runtime : browser.runtime).lastError) {
+          reject(new Error('Failed to load configuration'));
+          return;
+        }
+        
         if (data[this.storageKey]) {
           this.config = { ...defaultConfig, ...data[this.storageKey] };
         }
@@ -213,13 +221,27 @@ export class ConfigManager {
   }
 
   public async saveConfig(): Promise<void> {
-    return new Promise((resolve) => {
-      chrome.storage.sync.set({ [this.storageKey]: this.config }, resolve);
+    return new Promise((resolve, reject) => {
+      const storageAPI = typeof chrome !== 'undefined' ? chrome.storage : (typeof browser !== 'undefined' ? browser.storage : undefined);
+      if (!storageAPI) { resolve(); return; }
+      
+      storageAPI.sync.set({ [this.storageKey]: this.config }, () => {
+        if ((typeof chrome !== 'undefined' ? chrome.runtime : browser.runtime).lastError) {
+          reject(new Error('Failed to save configuration'));
+          return;
+        }
+        resolve();
+      });
     });
   }
 
   public getConfig(): ExtensionConfig {
     return this.config;
+  }
+
+  public async resetToDefaults(): Promise<void> {
+    this.config = { ...defaultConfig };
+    await this.saveConfig();
   }
 }
 

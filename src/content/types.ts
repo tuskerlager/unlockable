@@ -22,3 +22,6 @@ export interface Browsers {
     default: BrowserConfig;
     [key: string]: BrowserConfig | undefined;
 }
+
+// Common Tab type for TS where Chrome types may not be available
+export type Tab = { id?: number; url?: string };
