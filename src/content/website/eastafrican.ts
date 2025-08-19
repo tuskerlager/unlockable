@@ -24,9 +24,14 @@ function removeDivsById(divId: string): void {
     }
 };
 
-export function handle(): void {
+function applyUnlock(): void {
     removeClassFromElements("nmgp");
     removeDivsById("paywall");
-    console.log("Unlockable: ✅")
+}
 
-};
+export function handle(): void {
+    applyUnlock();
+    const observer = new MutationObserver(() => applyUnlock());
+    observer.observe(document.documentElement, { childList: true, subtree: true, attributes: true });
+    console.log("Unlockable: ✅");
+}

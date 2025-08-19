@@ -23,8 +23,15 @@ function removeDivsById(divId: string): void {
   if (divs.length === 0) { console.log(`Unlocker: No divs found with id: ${divId}`); }
 }
 
-export function handle(): void {
+function applyUnlock(): void {
   removeClassFromElements("nmgp");
   removeDivsById("paywall");
+}
+
+export function handle(): void {
+  applyUnlock();
+  // Keep content unlocked if the site re-applies paywall dynamically
+  const observer = new MutationObserver(() => applyUnlock());
+  observer.observe(document.documentElement, { childList: true, subtree: true, attributes: true });
   console.log("Unlockable: ✅");
 }

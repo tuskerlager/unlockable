@@ -8,7 +8,7 @@ const config: Configuration = merge(common, {
   mode: "production",
   entry: {
     content: path.resolve(__dirname, "../src/content/content.ts"),
-    background: path.resolve(__dirname, "../src/background/firefox-backgrond.ts"),
+    background: path.resolve(__dirname, "../src/background/firefox-background.ts"),
     options: path.resolve(__dirname, "../src/options/options.ts"),
     popup: path.resolve(__dirname, "../src/popup/popup.ts"),
   },

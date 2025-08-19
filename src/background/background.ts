@@ -1,3 +1,4 @@
+export {};
 // Listen for extension installation or update
 chrome.runtime.onInstalled.addListener((): void => {
   console.log("Unlockable installed!");

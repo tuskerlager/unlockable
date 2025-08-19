@@ -28,6 +28,10 @@ const websites: Website[] = [
 
 /** */
 async function main(): Promise<void> {
+  // Prevent double-execution if injected multiple times
+  if ((window as any).__unlockable_ran) return;
+  (window as any).__unlockable_ran = true;
+
   await configManager.loadConfig();
   const tabHostname: string = window.location.hostname.replace(/^www\./, "");
 

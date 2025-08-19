@@ -67,11 +67,8 @@ export async function handle(): Promise<void> {
         if (divs.length === 0) { console.log(`Unlockable: No divs found with class: ${className}`); }
       });
   
-      // Replace current document with modified content
-      document.documentElement.innerHTML = doc.documentElement.innerHTML;
-
-      // Clean up to prevent content script re-execution
-      document.querySelectorAll('script[src*="content.js"]').forEach(script => { script.remove();});
+      // Replace current document body safely to avoid nuking <html> listeners
+      document.body.innerHTML = doc.body.innerHTML;
     } catch (error) {
       console.error("Unlockable: Error processing page:", error);
     }

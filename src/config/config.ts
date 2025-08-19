@@ -1,3 +1,4 @@
+declare const browser: any;
 /** Configuration for specific websites */
 export interface SiteConfig {
   hostname: string;
@@ -105,14 +106,14 @@ const defaultConfig: ExtensionConfig = {
       hostname: "www.thecitizen.co.tz",
       title: "The Citizen",
       actions: [],
-      ts: "src/content/website/thestandard.ts",
+      ts: "src/content/website/thecitizen.ts",
       enabled: true,
     },
     mwanaspoti: {
       hostname: "www.mwanaspoti.co.tz",
       title: "Mwanaspoti",
       actions: [],
-      ts: "src/content/website/mwananchi.ts",
+      ts: "src/content/website/mwanaspoti.ts",
       enabled: true,
     },
   },
@@ -167,9 +168,9 @@ export class ConfigManager {
 
   /** Site configuration management */
   public getSite(hostname: string): SiteConfig | undefined {
-    return Object.values(this.config.sites).find(
-      (s) => s.hostname === hostname
-    );
+    const normalize = (h: string) => h.replace(/^www\./, "").toLowerCase();
+    const target = normalize(hostname);
+    return Object.values(this.config.sites).find((s) => normalize(s.hostname) === target);
   }
 
   public async updateSite(

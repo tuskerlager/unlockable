@@ -1,5 +1,5 @@
 {
-  "version": "0.0.2", // TODO: set dynamically
+  "version": "0.0.3", // TODO: set dynamically
   "settings": {
     "items": [], // i.e which/how many items are in settings
     "description": "This is a description of the settings"
@@ -34,8 +34,8 @@
       "type": "chromium",
       "description": ""
     },
-    "unkown": {
-      "type": "uknown", // to handle other cases
+    "unknown": {
+      "type": "unknown", // to handle other cases
       "description": ""
     }
   },
@@ -126,7 +126,7 @@
       "hostname": "www.thecitizen.co.tz",
       "title": "The Citizen",
       "actions": [],
-      "ts": "src/content/website/thestandard.ts",
+      "ts": "src/content/website/thecitizen.ts",
       "test-urls": [
         "https://www.thecitizen.co.tz/tanzania/news/national/sustainability-climate-risk-reporting-now-mandatory-for-banks-in-tanzania-4886846",
         "https://www.thecitizen.co.tz/tanzania/news/national/investors-see-imminent-conclusion-of-tanzania-lng-talks-4886794",
@@ -139,7 +139,7 @@
       "hostname": "www.mwanaspoti.co.tz",
       "title": "Mwanaspoti",
       "actions": [],
-      "ts": "src/content/website/mwananchi.ts",
+      "ts": "src/content/website/mwanaspoti.ts",
       "test-urls": [
         "https://www.mwanaspoti.co.tz/ms/soka/simba-yanga-hazichekani-4887034",
         "https://www.mwanaspoti.co.tz/ms/kolamu/hisia-zangu-operesheni-luanda-na-nouakchott-zimefanikiwa-tukutane-kwa-mkapa-4887578",
