@@ -2,7 +2,20 @@ import { configManager, type SiteConfig } from "../config/config";
 import type { Tab } from "../content/types";
 import "./popup.css";
 
+declare const __BUILD_DATE__: string;
+
 document.addEventListener("DOMContentLoaded", () => {
+  const setVersion = () => {
+    try {
+      const version = (typeof chrome !== 'undefined' ? chrome.runtime.getManifest().version :
+                      (typeof browser !== 'undefined' ? browser.runtime.getManifest().version : undefined));
+      const el = document.getElementById("popup-version");
+      if (el && version) { el.textContent = `v${version}`; }
+    } catch {}
+  };
+  setVersion();
+
+  // Optionally attach build date somewhere in popup if needed in future
   // Add click handlers for all three action buttons
 
   // --- 🔓 Unlocking Premium Articles

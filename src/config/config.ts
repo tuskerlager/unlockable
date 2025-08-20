@@ -41,7 +41,9 @@ export interface ExtensionConfig {
 
 // Our default configuration
 const defaultConfig: ExtensionConfig = {
-  version: "0.0.3", // FIXME: read from manifest/config.jsonc
+  version: (typeof chrome !== 'undefined' && chrome.runtime?.getManifest ? chrome.runtime.getManifest().version :
+            typeof browser !== 'undefined' && browser.runtime?.getManifest ? browser.runtime.getManifest().version :
+            "0.0.0"),
   notifications: {
     enabled: true,
   },
@@ -226,7 +228,8 @@ export class ConfigManager {
       const storageAPI = typeof chrome !== 'undefined' ? chrome.storage : (typeof browser !== 'undefined' ? browser.storage : undefined);
       if (!storageAPI) { resolve(); return; }
       
-      storageAPI.sync.set({ [this.storageKey]: this.config }, () => {
+      const { version: _ignoredVersion, ...configToPersist } = this.config as ExtensionConfig;
+      storageAPI.sync.set({ [this.storageKey]: configToPersist }, () => {
         if ((typeof chrome !== 'undefined' ? chrome.runtime : browser.runtime).lastError) {
           reject(new Error('Failed to save configuration'));
           return;

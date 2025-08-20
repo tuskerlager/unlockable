@@ -36,7 +36,7 @@ loading_bar() {
 
 # -- Display help info/usage
 usage() {
-    echo "Usage: $0 -v|--version <version> -b|--browser <browser>"
+    echo "Usage: $0 [-v|--version <version>] -b|--browser <browser>"
     echo "Example: $0 -v 0.1.1 -b chromium"
     echo "Available browsers: chromium, firefox"
     exit 1
@@ -71,6 +71,15 @@ while [[ "$#" -gt 0 ]]; do
         ;;
     esac
 done
+
+# -- If version not provided, read from package.json
+if [ -z "$version" ]; then
+    if [ ! -f "${SCRIPT_DIR}/package.json" ]; then
+        echo "Error: package.json not found to determine version"
+        exit 1
+    fi
+    version=$(grep -o '"version"[^"]*"[0-9]\+\.[0-9]\+\.[0-9]\+"' "${SCRIPT_DIR}/package.json" | head -n1 | sed 's/.*"\([0-9]\+\.[0-9]\+\.[0-9]\+\)"/\1/')
+fi
 
 # -- Validate required arguments
 if [ -z "$version" ] || [ -z "$browser" ]; then

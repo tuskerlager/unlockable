@@ -34,6 +34,11 @@
 	"[typescript]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	}
+	},
+	"extensions": {
+		"recommendations": [
+			"gitlab.gitlab-workflow"
+		]
 	}
   }
   

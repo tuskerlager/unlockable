@@ -1,11 +1,11 @@
 {
   "name": "unlockable",
-  "version": "0.0.3",
+  "version": "0.2.0",
   "description": "Unlock blog posts, articles, newspapers and more.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run build:firefox && npm run build:chromium",
+    "build": "export BUILD_DATE=\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\" && npm run build:firefox && npm run build:chromium",
     "build:firefox": "webpack --config webpack/webpack.firefox.ts",
     "build:chromium": "webpack --config webpack/webpack.chromium.ts",
     "dev:firefox": "webpack --config webpack/webpack.firefox.ts --watch",

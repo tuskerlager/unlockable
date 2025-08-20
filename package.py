@@ -63,16 +63,31 @@ FIREFOX_DIR: Path = SCRIPT_DIR / "dist" / "firefox"
 # ARCHIVE_DIR: str = os.path.join(SCRIPT_DIR, "archives")
 ARCHIVE_DIR: Path = SCRIPT_DIR / "archives"
 for directory in [CHROMIUM_DIR, FIREFOX_DIR, ARCHIVE_DIR]:
-    os.makedirs(name=ARCHIVE_DIR, exist_ok=True)
+    os.makedirs(name=directory, exist_ok=True)
 
 # -- Parse command line arguments
 parser = argparse.ArgumentParser(description="Archive Packaging Script")
-parser.add_argument("-v", "--version", required=True, help="Version number in format x.x.x")
+parser.add_argument("-v", "--version", required=False, help="Version number in format x.x.x (defaults to package.json version)")
 parser.add_argument("-b", "--browser", required=True, help="Browser name (chrome, firefox, edge, opera)")
 args: argparse.Namespace = parser.parse_args()
 
 version = args.version
 browser = args.browser
+
+# -- If version not provided, read from package.json
+if version is None:
+    package_json_path: Path = SCRIPT_DIR / "package.json"
+    if not package_json_path.exists():
+        print("Error: package.json not found to determine version")
+        sys.exit(1)
+    try:
+        import json
+        with open(package_json_path, "r", encoding="utf-8") as f:
+            pkg = json.load(f)
+        version = pkg["version"]
+    except Exception as e:
+        print(f"Error reading version from package.json: {e}")
+        sys.exit(1)
 
 # -- Validate version format. Firefox doesn't allow letters in version
 # TODO: make more robust, allow 4-digits if Firefox and Chrome allow it

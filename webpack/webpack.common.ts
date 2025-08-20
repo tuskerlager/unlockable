@@ -1,9 +1,13 @@
 /** */
 import path from "path";
+import fs from "fs";
 import { Configuration } from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import CopyPlugin from "copy-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import webpack from "webpack";
+
+const buildDate = process.env.BUILD_DATE || new Date().toISOString();
 
 const config: Configuration = {
   entry: {
@@ -11,6 +15,7 @@ const config: Configuration = {
     background: path.resolve(__dirname, "../src/background/background.ts"),
     options: path.resolve(__dirname, "../src/options/options.ts"),
     popup: path.resolve(__dirname, "../src/popup/popup.ts"),
+    about: path.resolve(__dirname, "../src/popup/about.ts"),
   },
 
   module: {
@@ -31,6 +36,9 @@ const config: Configuration = {
   },
 
   plugins: [
+    new webpack.DefinePlugin({
+      __BUILD_DATE__: JSON.stringify(buildDate),
+    }),
     new MiniCssExtractPlugin({
       filename: "[name].css",
     }),
@@ -47,13 +55,32 @@ const config: Configuration = {
     new HtmlWebpackPlugin({
       template: "./src/popup/about.html",
       filename: "about.html",
-      chunks: [],
+      chunks: ["about"],
     }),
     new CopyPlugin({
       patterns: [
         { from: "_locales", to: "_locales" },
         { from: "src/icons", to: "icons" },
-        { from: "src/config/config.jsonc", to: "config.jsonc" },
+        {
+          from: "src/config/config.jsonc",
+          to: "config.jsonc",
+          transform(content) {
+            const pkgPath = path.resolve(__dirname, "../package.json");
+            const pkg = JSON.parse(fs.readFileSync(pkgPath, "utf-8"));
+            const stripped = content
+              .toString()
+              .replace(/\/\*[\s\S]*?\*\/|\/\/.*$/gm, "");
+            try {
+              const cfg = JSON.parse(stripped);
+              cfg.version = pkg.version;
+              return JSON.stringify(cfg, null, 2);
+            } catch {
+              return content
+                .toString()
+                .replace(/(\"version\"\s*:\s*\")[^\"]+(\")/, `$1${pkg.version}$2`);
+            }
+          },
+        },
         { from: "src/config/sites.json", to: "sites.json" },
         { from: "src/options/options.css", to: "options.css" },
         // { from: "src/**/*.css", to: "[name][ext]" }
